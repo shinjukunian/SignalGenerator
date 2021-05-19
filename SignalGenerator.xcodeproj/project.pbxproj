@@ -13,6 +13,12 @@
 		5A100CF3265531B900C00534 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100CDE265531B800C00534 /* ContentView.swift */; };
 		5A100CF4265531B900C00534 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A100CDF265531B800C00534 /* Assets.xcassets */; };
 		5A100CF5265531B900C00534 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5A100CDF265531B800C00534 /* Assets.xcassets */; };
+		5A100CFF265531CA00C00534 /* SignalGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100CFE265531CA00C00534 /* SignalGenerator.swift */; };
+		5A100D00265531CA00C00534 /* SignalGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100CFE265531CA00C00534 /* SignalGenerator.swift */; };
+		5A100D022655513500C00534 /* FrequencySliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D012655513500C00534 /* FrequencySliderView.swift */; };
+		5A100D032655513500C00534 /* FrequencySliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D012655513500C00534 /* FrequencySliderView.swift */; };
+		5A100D0526555B4500C00534 /* AudioNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D0426555B4500C00534 /* AudioNode.swift */; };
+		5A100D0626555B4500C00534 /* AudioNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D0426555B4500C00534 /* AudioNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,9 @@
 		5A100CEC265531B900C00534 /* SignalGenerator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SignalGenerator.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A100CEE265531B900C00534 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5A100CEF265531B900C00534 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		5A100CFE265531CA00C00534 /* SignalGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalGenerator.swift; sourceTree = "<group>"; };
+		5A100D012655513500C00534 /* FrequencySliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencySliderView.swift; sourceTree = "<group>"; };
+		5A100D0426555B4500C00534 /* AudioNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +68,9 @@
 			children = (
 				5A100CDD265531B800C00534 /* SignalGeneratorApp.swift */,
 				5A100CDE265531B800C00534 /* ContentView.swift */,
+				5A100D012655513500C00534 /* FrequencySliderView.swift */,
+				5A100CFE265531CA00C00534 /* SignalGenerator.swift */,
+				5A100D0426555B4500C00534 /* AudioNode.swift */,
 				5A100CDF265531B800C00534 /* Assets.xcassets */,
 			);
 			path = Shared;
@@ -187,6 +199,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A100D022655513500C00534 /* FrequencySliderView.swift in Sources */,
+				5A100D0526555B4500C00534 /* AudioNode.swift in Sources */,
+				5A100CFF265531CA00C00534 /* SignalGenerator.swift in Sources */,
 				5A100CF2265531B900C00534 /* ContentView.swift in Sources */,
 				5A100CF0265531B900C00534 /* SignalGeneratorApp.swift in Sources */,
 			);
@@ -196,6 +211,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A100D032655513500C00534 /* FrequencySliderView.swift in Sources */,
+				5A100D0626555B4500C00534 /* AudioNode.swift in Sources */,
+				5A100D00265531CA00C00534 /* SignalGenerator.swift in Sources */,
 				5A100CF3265531B900C00534 /* ContentView.swift in Sources */,
 				5A100CF1265531B900C00534 /* SignalGeneratorApp.swift in Sources */,
 			);
