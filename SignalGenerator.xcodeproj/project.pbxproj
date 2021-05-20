@@ -19,6 +19,16 @@
 		5A100D032655513500C00534 /* FrequencySliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D012655513500C00534 /* FrequencySliderView.swift */; };
 		5A100D0526555B4500C00534 /* AudioNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D0426555B4500C00534 /* AudioNode.swift */; };
 		5A100D0626555B4500C00534 /* AudioNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D0426555B4500C00534 /* AudioNode.swift */; };
+		5A100D082655FEDF00C00534 /* SpectrumAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D072655FEDF00C00534 /* SpectrumAnalyzer.swift */; };
+		5A100D092655FEDF00C00534 /* SpectrumAnalyzer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D072655FEDF00C00534 /* SpectrumAnalyzer.swift */; };
+		5A100D0B265601D000C00534 /* SpectrumAnalyzer+AV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D0A265601D000C00534 /* SpectrumAnalyzer+AV.swift */; };
+		5A100D0C265601D000C00534 /* SpectrumAnalyzer+AV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D0A265601D000C00534 /* SpectrumAnalyzer+AV.swift */; };
+		5A100D0E265602D600C00534 /* SpectrogramLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D0D265602D600C00534 /* SpectrogramLayer.swift */; };
+		5A100D0F265602D600C00534 /* SpectrogramLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D0D265602D600C00534 /* SpectrogramLayer.swift */; };
+		5A100D112656041100C00534 /* SpectrogramLayer+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D102656041100C00534 /* SpectrogramLayer+Utility.swift */; };
+		5A100D122656041100C00534 /* SpectrogramLayer+Utility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D102656041100C00534 /* SpectrogramLayer+Utility.swift */; };
+		5A100D142656064000C00534 /* SpectrogramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D132656064000C00534 /* SpectrogramView.swift */; };
+		5A100D152656064000C00534 /* SpectrogramView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D132656064000C00534 /* SpectrogramView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +43,11 @@
 		5A100CFE265531CA00C00534 /* SignalGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignalGenerator.swift; sourceTree = "<group>"; };
 		5A100D012655513500C00534 /* FrequencySliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencySliderView.swift; sourceTree = "<group>"; };
 		5A100D0426555B4500C00534 /* AudioNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioNode.swift; sourceTree = "<group>"; };
+		5A100D072655FEDF00C00534 /* SpectrumAnalyzer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAnalyzer.swift; sourceTree = "<group>"; };
+		5A100D0A265601D000C00534 /* SpectrumAnalyzer+AV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpectrumAnalyzer+AV.swift"; sourceTree = "<group>"; };
+		5A100D0D265602D600C00534 /* SpectrogramLayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrogramLayer.swift; sourceTree = "<group>"; };
+		5A100D102656041100C00534 /* SpectrogramLayer+Utility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SpectrogramLayer+Utility.swift"; sourceTree = "<group>"; };
+		5A100D132656064000C00534 /* SpectrogramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrogramView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +83,11 @@
 			children = (
 				5A100CDD265531B800C00534 /* SignalGeneratorApp.swift */,
 				5A100CDE265531B800C00534 /* ContentView.swift */,
+				5A100D072655FEDF00C00534 /* SpectrumAnalyzer.swift */,
+				5A100D132656064000C00534 /* SpectrogramView.swift */,
+				5A100D0A265601D000C00534 /* SpectrumAnalyzer+AV.swift */,
+				5A100D0D265602D600C00534 /* SpectrogramLayer.swift */,
+				5A100D102656041100C00534 /* SpectrogramLayer+Utility.swift */,
 				5A100D012655513500C00534 /* FrequencySliderView.swift */,
 				5A100CFE265531CA00C00534 /* SignalGenerator.swift */,
 				5A100D0426555B4500C00534 /* AudioNode.swift */,
@@ -199,11 +219,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A100D142656064000C00534 /* SpectrogramView.swift in Sources */,
+				5A100D0B265601D000C00534 /* SpectrumAnalyzer+AV.swift in Sources */,
 				5A100D022655513500C00534 /* FrequencySliderView.swift in Sources */,
 				5A100D0526555B4500C00534 /* AudioNode.swift in Sources */,
 				5A100CFF265531CA00C00534 /* SignalGenerator.swift in Sources */,
 				5A100CF2265531B900C00534 /* ContentView.swift in Sources */,
+				5A100D0E265602D600C00534 /* SpectrogramLayer.swift in Sources */,
+				5A100D082655FEDF00C00534 /* SpectrumAnalyzer.swift in Sources */,
 				5A100CF0265531B900C00534 /* SignalGeneratorApp.swift in Sources */,
+				5A100D112656041100C00534 /* SpectrogramLayer+Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,11 +236,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A100D152656064000C00534 /* SpectrogramView.swift in Sources */,
+				5A100D0C265601D000C00534 /* SpectrumAnalyzer+AV.swift in Sources */,
 				5A100D032655513500C00534 /* FrequencySliderView.swift in Sources */,
 				5A100D0626555B4500C00534 /* AudioNode.swift in Sources */,
 				5A100D00265531CA00C00534 /* SignalGenerator.swift in Sources */,
 				5A100CF3265531B900C00534 /* ContentView.swift in Sources */,
+				5A100D0F265602D600C00534 /* SpectrogramLayer.swift in Sources */,
+				5A100D092655FEDF00C00534 /* SpectrumAnalyzer.swift in Sources */,
 				5A100CF1265531B900C00534 /* SignalGeneratorApp.swift in Sources */,
+				5A100D122656041100C00534 /* SpectrogramLayer+Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

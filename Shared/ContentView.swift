@@ -10,11 +10,19 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var generator=SignalGenerator()
     @State var showLowRange:Bool = false
-    
     @State var numberOfFrequencies:Int=1
+    
+    @State var showSpectrogram:Bool = false
     
     var body: some View {
         VStack{
+            
+            if showSpectrogram{
+                SpectrogramView().frame(maxHeight: 200).clipShape(RoundedRectangle(cornerRadius: 20))
+                Divider()
+            }
+            
+            
             picker
             VStack{
                 Slider(value: $generator.amplitude, in: Float(0)...1, minimumValueLabel: Image(systemName:"speaker.wave.1"), maximumValueLabel: Image(systemName:"speaker.wave.3")){
@@ -23,6 +31,9 @@ struct ContentView: View {
                 
                 Text("Volume: \(generator.amplitude, specifier: "%.2f")")
             }
+            
+            
+            
             ScrollView{
                 
                 ForEach(Array(zip(generator.nodes, generator.nodes.indices)), id: \.0.id, content: {(node,idx) in
@@ -49,15 +60,39 @@ struct ContentView: View {
         }
         
         .toolbar(content: {
-            ToolbarItem(placement: .navigationBarTrailing, content: {
+            
+            let placement:ToolbarItemPlacement = {
+                let p:ToolbarItemPlacement
+                #if os(iOS)
+                p = .navigationBarTrailing
+                #else
+                p = .automatic
+                #endif
+                return p
+            }()
+            
+            ToolbarItem(placement: placement, content: {
+                Button(action: {
+                    showSpectrogram.toggle()
+                }, label: {
+                    if !showSpectrogram{
+                        Image(systemName: "mic")
+                    }
+                    else{
+                        Image(systemName: "mic.slash")
+                    }
+                    
+                })
+            })
+            
+            ToolbarItemGroup(placement: placement, content: {
+                
                 Button(action: {
                     generator.attachNode()
                 }, label: {
                     Image(systemName: "plus")
                 }).disabled(!generator.isRunning || !generator.canAttachNodes)
-            })
-            
-            ToolbarItem(placement: .navigationBarTrailing, content: {
+                
                 Button(action: {
                     generator.isRunning.toggle()
                 }, label: {
@@ -70,6 +105,7 @@ struct ContentView: View {
                     
                 })
             })
+
             
             
             

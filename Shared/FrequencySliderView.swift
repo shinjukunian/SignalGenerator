@@ -16,9 +16,15 @@ struct FrequencySliderView: View {
     @State var showClose:Bool
     @State var removeHandler:(_ node:AudioNode)->Void
     
+    var range:ClosedRange<Float>{
+        return showLowRange ? Float(100)...1200 : Float(50)...7000
+    }
+    
+    
     var body: some View {
         VStack(alignment: .trailing){
-            
+            Divider()
+                .padding(.bottom, 3.0)
             VStack{
                 if showClose{
                     HStack{
@@ -29,9 +35,8 @@ struct FrequencySliderView: View {
                             Image(systemName: "xmark")
                         }).buttonStyle(BorderlessButtonStyle())
                     }
+                    .padding(.bottom, 3.0)
                 }
-                
-                let range=showLowRange ? Float(100)...1200 : Float(50)...7000
                 
                 Slider(value: $node.frequency,
                        in: range,
@@ -41,20 +46,23 @@ struct FrequencySliderView: View {
                 }
                 
                 
-                
-                HStack(spacing: 15
-                ){
-                    HStack{
-                        Text("Frequency")
-                        textField
-                        Text("Hz")
-                    }
-                    
+                #if os(macOS)
+                HStack{
+                    innerStack
                     Toggle(isOn: $showLowRange, label: {
                         Text("Fine")
                     }).fixedSize()
-                    
                 }
+                #else
+                VStack{
+                    innerStack
+                    Toggle(isOn: $showLowRange, label: {
+                        Text("Fine")
+                    }).fixedSize()
+                }
+                #endif
+
+
             }
             
         }
@@ -70,6 +78,24 @@ struct FrequencySliderView: View {
 //                frequency=0
 //            }
 //        })
+    }
+        
+    var innerStack:some View{
+        let inner=HStack(spacing: 0.0){
+            
+            HStack(spacing: 0){
+                Text("Frequency: ")
+                textField
+                Text(" Hz")
+            }
+            
+            Stepper(value: $node.frequency,
+                            in: range,
+                            step: 10) {
+                Text("")
+            }.fixedSize()
+        }
+        return inner
     }
     
     var textField:some View{
