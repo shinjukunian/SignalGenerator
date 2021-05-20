@@ -19,19 +19,18 @@ struct ContentView: View {
             
             if showSpectrogram{
                 SpectrumAnalyzerView()
-                    .frame(maxHeight: 200).clipShape(RoundedRectangle(cornerRadius: 20))
+//                    .frame(maxHeight: 300)
                 Divider()
             }
             
-            
-            picker
             VStack{
+                picker
                 Slider(value: $generator.amplitude, in: Float(0)...1, minimumValueLabel: Image(systemName:"speaker.wave.1"), maximumValueLabel: Image(systemName:"speaker.wave.3")){
                     Text("")
                 }
                 
                 Text("Volume: \(generator.amplitude, specifier: "%.2f")")
-            }
+            }.disabled(generator.isRunning == false)
             
             
             
@@ -48,11 +47,11 @@ struct ContentView: View {
                     }
                     
                 })
-            }
+            }.disabled(generator.isRunning == false)
             
             Spacer()
         }
-        .disabled(generator.isRunning == false)
+        
         .padding([.top, .leading, .trailing])
         .frame(minWidth: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealWidth: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, maxWidth: 400, minHeight: /*@START_MENU_TOKEN@*/0/*@END_MENU_TOKEN@*/, idealHeight: /*@START_MENU_TOKEN@*/100/*@END_MENU_TOKEN@*/, maxHeight: /*@START_MENU_TOKEN@*/.infinity/*@END_MENU_TOKEN@*/, alignment: /*@START_MENU_TOKEN@*/.center/*@END_MENU_TOKEN@*/)
         

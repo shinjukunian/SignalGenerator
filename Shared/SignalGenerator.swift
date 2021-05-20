@@ -104,9 +104,12 @@ class SignalGenerator:ObservableObject{
         do {
             // Set the audio session category, mode, and options.
             try audioSession.setCategory(.playAndRecord, mode: .measurement, options: [.mixWithOthers])
+            try audioSession.setPreferredSampleRate(22050)
+            try audioSession.setActive(true, options: [])
         } catch {
             print("Failed to set audio session category.")
         }
+        
         #endif
         
         self.engine = AVAudioEngine()

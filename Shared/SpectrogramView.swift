@@ -12,22 +12,41 @@ import SwiftUI
 
 struct SpectrogramView:NSViewRepresentable{
     
-    @ObservedObject var spectrumAnalyzer:SpectrumAnalyzer
-    
-    @Binding var isRunning:Bool
-    
     func makeNSView(context: Context) -> NSView {
+        
         let view=NSView(frame: .zero)
-        let layer=SpectrogramLayer(analyzer: spectrumAnalyzer)
+        let layer=AudioSpectrogram()
         view.layer=layer
         view.wantsLayer = true
+        layer.startRunning()
+        
         return view
     }
     
     func updateNSView(_ nsView: NSView, context: Context) {
-        if isRunning != spectrumAnalyzer.isRunning{
-            spectrumAnalyzer.isRunning=isRunning
-        }
+        
+    }
+    
+    typealias NSViewType = NSView
+}
+
+struct MelSpectrogramView:NSViewRepresentable{
+    
+    
+    func makeNSView(context: Context) -> NSView {
+        
+        let view=NSView(frame: .zero)
+        
+        let layer=MelSpectrogram()
+        view.layer=layer
+        view.wantsLayer = true
+        layer.startRunning()
+        
+        return view
+    }
+    
+    func updateNSView(_ nsView: NSView, context: Context) {
+        
     }
     
     typealias NSViewType = NSView
@@ -39,23 +58,43 @@ struct SpectrogramView:UIViewRepresentable{
     
     typealias UIViewType = UIView
     
-    @ObservedObject var spectrumAnalyzer:SpectrumAnalyzer
-    
-    @Binding var isRunning:Bool
+   
     
     func makeUIView(context: Context) -> UIView {
+        
         let view=SpectrogramUIView()
-        let layer=SpectrogramLayer(analyzer: spectrumAnalyzer)
+        let layer=AudioSpectrogram()
         view.layer.addSublayer(layer)
         layer.frame=view.bounds
+        layer.startRunning()
         return view
     }
     
     
     func updateUIView(_ uiView: UIView, context: Context) {
-        if isRunning != spectrumAnalyzer.isRunning{
-            spectrumAnalyzer.isRunning=isRunning
-        }
+        uiView.setNeedsLayout()
+    }
+    
+}
+
+struct MelSpectrogramView:UIViewRepresentable{
+    
+    typealias UIViewType = UIView
+    
+   
+    
+    func makeUIView(context: Context) -> UIView {
+        
+        let view=SpectrogramUIView()
+        let layer=MelSpectrogram()
+        view.layer.addSublayer(layer)
+        layer.frame=view.bounds
+        layer.startRunning()
+        return view
+    }
+    
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
         uiView.setNeedsLayout()
     }
     

@@ -1,15 +1,16 @@
-//
-//  SpectrumAnalyzer+AV.swift
-//  SignalGenerator
-//
-//  Created by Morten Bertz on 2021/05/20.
-//
+/*
+See LICENSE folder for this sample’s licensing information.
 
-import Foundation
+Abstract:
+AudioSpectrogram extension for AVFoundation support.
+*/
+
 import AVFoundation
 
-extension SpectrumAnalyzer: AVCaptureAudioDataOutputSampleBufferDelegate{
-    
+// MARK: AVCaptureAudioDataOutputSampleBufferDelegate and AVFoundation Support
+
+extension AudioSpectrogram: AVCaptureAudioDataOutputSampleBufferDelegate {
+ 
     public func captureOutput(_ output: AVCaptureOutput,
                               didOutput sampleBuffer: CMSampleBuffer,
                               from connection: AVCaptureConnection) {
@@ -41,7 +42,7 @@ extension SpectrumAnalyzer: AVCaptureAudioDataOutputSampleBufferDelegate{
             nyquistFrequency = 0.5 / (duration / timescale / numsamples)
         }
 
-        if self.rawAudioData.count < SpectrumAnalyzer.sampleCount * 2 {
+        if self.rawAudioData.count < AudioSpectrogram.sampleCount * 2 {
             let actualSampleCount = CMSampleBufferGetNumSamples(sampleBuffer)
             
             let ptr = data.bindMemory(to: Int16.self, capacity: actualSampleCount)
@@ -50,16 +51,25 @@ extension SpectrumAnalyzer: AVCaptureAudioDataOutputSampleBufferDelegate{
             rawAudioData.append(contentsOf: Array(buf))
         }
 
-        while self.rawAudioData.count >= SpectrumAnalyzer.sampleCount {
-            let dataToProcess = Array(self.rawAudioData[0 ..< SpectrumAnalyzer.sampleCount])
-            self.rawAudioData.removeFirst(SpectrumAnalyzer.hopCount)
+        while self.rawAudioData.count >= AudioSpectrogram.sampleCount {
+            let dataToProcess = Array(self.rawAudioData[0 ..< AudioSpectrogram.sampleCount])
+            self.rawAudioData.removeFirst(AudioSpectrogram.hopCount)
             self.processData(values: dataToProcess)
         }
      
+        createAudioSpectrogram()
     }
     
-    
     func configureCaptureSession() {
+        // Also note that:
+        //
+        // When running in iOS, you must add a "Privacy - Microphone Usage
+        // Description" entry.
+        //
+        // When running in macOS, you must add a "Privacy - Microphone Usage
+        // Description" entry to `Info.plist`, and check "audio input" and
+        // "camera access" under the "Resource Access" category of "Hardened
+        // Runtime".
         switch AVCaptureDevice.authorizationStatus(for: .audio) {
             case .authorized:
                     break
@@ -68,7 +78,6 @@ extension SpectrumAnalyzer: AVCaptureAudioDataOutputSampleBufferDelegate{
                 AVCaptureDevice.requestAccess(for: .audio,
                                               completionHandler: { granted in
                     if !granted {
-                        //fatalError("App requires microphone access.")
                         return
                     } else {
                         self.configureCaptureSession()
@@ -80,8 +89,7 @@ extension SpectrumAnalyzer: AVCaptureAudioDataOutputSampleBufferDelegate{
                 // Users can add authorization in "Settings > Privacy > Microphone"
                 // on an iOS device, or "System Preferences > Security & Privacy >
                 // Microphone" on a macOS device.
-//                fatalError("App requires microphone access.")
-                return
+                fatalError("App requires microphone access.")
         }
         
         captureSession.beginConfiguration()
@@ -94,7 +102,9 @@ extension SpectrumAnalyzer: AVCaptureAudioDataOutputSampleBufferDelegate{
             AVFormatIDKey: kAudioFormatLinearPCM,
             AVLinearPCMIsFloatKey: false,
             AVLinearPCMBitDepthKey: 16,
-            AVNumberOfChannelsKey: 1]
+            AVNumberOfChannelsKey: 1,
+            AVSampleRateKey: 22050
+        ]
         #endif
         
         if captureSession.canAddOutput(audioOutput) {
@@ -116,5 +126,14 @@ extension SpectrumAnalyzer: AVCaptureAudioDataOutputSampleBufferDelegate{
         }
         
         captureSession.commitConfiguration()
+    }
+    
+    /// Starts the audio spectrogram.
+    func startRunning() {
+        sessionQueue.async {
+            if AVCaptureDevice.authorizationStatus(for: .audio) == .authorized {
+                self.captureSession.startRunning()
+            }
+        }
     }
 }
