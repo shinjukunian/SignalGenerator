@@ -103,7 +103,7 @@ class SignalGenerator:ObservableObject{
         let audioSession = AVAudioSession.sharedInstance()
         do {
             // Set the audio session category, mode, and options.
-            try audioSession.setCategory(.playback, mode: .moviePlayback, options: [])
+            try audioSession.setCategory(.playAndRecord, mode: .measurement, options: [.mixWithOthers])
         } catch {
             print("Failed to set audio session category.")
         }

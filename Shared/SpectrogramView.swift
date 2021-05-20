@@ -12,9 +12,9 @@ import SwiftUI
 
 struct SpectrogramView:NSViewRepresentable{
     
-    @StateObject var spectrumAnalyzer=SpectrumAnalyzer()
+    @ObservedObject var spectrumAnalyzer:SpectrumAnalyzer
     
-    @State var isRunning:Bool = true
+    @Binding var isRunning:Bool
     
     func makeNSView(context: Context) -> NSView {
         let view=NSView(frame: .zero)
@@ -32,5 +32,43 @@ struct SpectrogramView:NSViewRepresentable{
     
     typealias NSViewType = NSView
 }
+
+#else
+
+struct SpectrogramView:UIViewRepresentable{
+    
+    typealias UIViewType = UIView
+    
+    @ObservedObject var spectrumAnalyzer:SpectrumAnalyzer
+    
+    @Binding var isRunning:Bool
+    
+    func makeUIView(context: Context) -> UIView {
+        let view=SpectrogramUIView()
+        let layer=SpectrogramLayer(analyzer: spectrumAnalyzer)
+        view.layer.addSublayer(layer)
+        layer.frame=view.bounds
+        return view
+    }
+    
+    
+    func updateUIView(_ uiView: UIView, context: Context) {
+        if isRunning != spectrumAnalyzer.isRunning{
+            spectrumAnalyzer.isRunning=isRunning
+        }
+        uiView.setNeedsLayout()
+    }
+    
+}
+
+
+fileprivate class SpectrogramUIView:UIView{
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        self.layer.sublayers?.forEach({$0.frame=self.bounds})
+    }
+}
+
 
 #endif

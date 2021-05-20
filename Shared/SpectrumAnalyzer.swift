@@ -73,7 +73,6 @@ class SpectrumAnalyzer:NSObject, ObservableObject{
     @Published var isRunning:Bool = false{
         didSet{
             if isRunning{
-                print("Start")
                 startRunning()
             }
             else{

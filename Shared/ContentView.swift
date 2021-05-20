@@ -18,7 +18,8 @@ struct ContentView: View {
         VStack{
             
             if showSpectrogram{
-                SpectrogramView().frame(maxHeight: 200).clipShape(RoundedRectangle(cornerRadius: 20))
+                SpectrumAnalyzerView()
+                    .frame(maxHeight: 200).clipShape(RoundedRectangle(cornerRadius: 20))
                 Divider()
             }
             

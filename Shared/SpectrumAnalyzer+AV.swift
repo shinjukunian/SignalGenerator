@@ -68,7 +68,8 @@ extension SpectrumAnalyzer: AVCaptureAudioDataOutputSampleBufferDelegate{
                 AVCaptureDevice.requestAccess(for: .audio,
                                               completionHandler: { granted in
                     if !granted {
-                        fatalError("App requires microphone access.")
+                        //fatalError("App requires microphone access.")
+                        return
                     } else {
                         self.configureCaptureSession()
                         self.sessionQueue.resume()
@@ -79,7 +80,8 @@ extension SpectrumAnalyzer: AVCaptureAudioDataOutputSampleBufferDelegate{
                 // Users can add authorization in "Settings > Privacy > Microphone"
                 // on an iOS device, or "System Preferences > Security & Privacy >
                 // Microphone" on a macOS device.
-                fatalError("App requires microphone access.")
+//                fatalError("App requires microphone access.")
+                return
         }
         
         captureSession.beginConfiguration()

@@ -73,12 +73,14 @@ class SpectrogramLayer: CALayer {
     init(analyzer:SpectrumAnalyzer) {
         super.init()
         contentsGravity = .resize
-
+        self.subscribe(to: analyzer)
+    }
+    
+    func subscribe(to analyzer:SpectrumAnalyzer){
         self.subScription=analyzer.frequencies.sink(receiveValue: {[weak self]v in
             self?.frequencyDomainValues=v
             self?.createAudioSpectrogram()
         })
-
     }
     
     
