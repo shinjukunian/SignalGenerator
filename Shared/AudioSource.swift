@@ -12,6 +12,7 @@ import Accelerate
 
 class AudioSource:NSObject,ObservableObject, AVCaptureAudioDataOutputSampleBufferDelegate{
     
+    typealias Publisher = AnyPublisher<Int16,Never>
     
     let captureSession = AVCaptureSession()
     let audioOutput = AVCaptureAudioDataOutput()

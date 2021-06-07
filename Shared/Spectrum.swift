@@ -34,17 +34,21 @@ struct Spectrum:Shape{
             min=Double(Int16.min)
         }
         
-        let deltaX = rect.width / CGFloat(samples.count)
-        let scaleY = CGFloat(max - min) / rect.height
+        let deltaX = Double(rect.width) / Double(samples.count)
+        let scaleY = Double(max - min) / Double(rect.height)
         
-        guard scaleY.isNormal, deltaX.isNormal else{return Path()}
+        guard scaleY.isNormal, deltaX.isNormal, samples.count > 0 else{return Path()}
+        
+        let subtracted=vDSP.add(-min, samples)
+        let scaled=vDSP.divide(subtracted, scaleY)
         
         return Path({ path in
-            guard let first=samples.first else {return}
+            guard let first=scaled.first else {return}
             
-            path.move(to: CGPoint(x: 0, y:  CGFloat(first-min) /  scaleY))
-            samples.dropFirst().enumerated().forEach({(idx, sample) in
-                path.addLine(to: CGPoint(x: deltaX * CGFloat(idx), y: CGFloat(sample-min) / scaleY))
+            path.move(to: CGPoint(x: 0, y: first))
+                      
+            scaled.dropFirst().enumerated().forEach({(idx, sample) in
+                path.addLine(to: CGPoint(x: deltaX * Double(idx), y: sample))
             })
             
         })

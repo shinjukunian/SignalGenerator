@@ -6,20 +6,38 @@ Class that generates a spectrogram from an audio signal.
 */
 import AVFoundation
 import Accelerate
+import Combine
 
 public class AudioSpectrogram: CALayer {
 
     // MARK: Initialization
     
-    override init() {
+    
+    init(audioSource:AnyPublisher<Int16,Never>) {
         super.init()
-        
         contentsGravity = .resize
-        
-        configureCaptureSession()
-        audioOutput.setSampleBufferDelegate(self,
-                                            queue: captureQueue)
+        audioSource
+            .buffer(size: AudioSpectrogram.sampleCount, prefetch: .byRequest, whenFull: .dropOldest)
+            .collect(AudioSpectrogram.sampleCount)
+            .sink(receiveValue: {[unowned self] samples in
+                if self.rawAudioData.count < AudioSpectrogram.sampleCount * 2 {
+                    rawAudioData.append(contentsOf: samples)
+                }
+                
+//                dispatchSemaphore.wait()
+                while self.rawAudioData.count >= AudioSpectrogram.sampleCount {
+                    let dataToProcess = Array(self.rawAudioData[0 ..< AudioSpectrogram.sampleCount])
+                    self.rawAudioData.removeFirst(AudioSpectrogram.hopCount)
+                    self.processData(values: dataToProcess)
+                }
+             
+                createAudioSpectrogram()
+//                dispatchSemaphore.signal()
+                
+            })
+            .store(in: &cancelables)
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -38,16 +56,10 @@ public class AudioSpectrogram: CALayer {
     
     /// Determines the overlap between frames.
     static let hopCount = 512
+    
+    var cancelables=Set<AnyCancellable>()
 
-    let captureSession = AVCaptureSession()
-    let audioOutput = AVCaptureAudioDataOutput()
-    let captureQueue = DispatchQueue(label: "captureQueue",
-                                     qos: .userInitiated,
-                                     attributes: [],
-                                     autoreleaseFrequency: .workItem)
-    let sessionQueue = DispatchQueue(label: "sessionQueue",
-                                     attributes: [],
-                                     autoreleaseFrequency: .workItem)
+   
     
     let forwardDCT = vDSP.DCT(count: sampleCount,
                               transformType: .II)!
@@ -85,6 +97,8 @@ public class AudioSpectrogram: CALayer {
         
         return format
     }()
+    
+    
     
     /// RGB vImage buffer that contains a vertical representation of the audio spectrogram.
     lazy var rgbImageBuffer: vImage_Buffer = {

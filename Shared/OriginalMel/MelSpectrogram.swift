@@ -6,25 +6,46 @@ Class that generates a spectrogram from an audio signal.
 */
 import AVFoundation
 import Accelerate
-
+import Combine
 
 public class MelSpectrogram: CALayer {
     
     // MARK: Initialization
     
-    override init() {
+    
+    init(audioSource:AudioSource.Publisher) {
         super.init()
-        
         contentsGravity = .resize
         
         // Set the `magnificationFilter` to `.nearest` to render the mel
         // spectrogram as discrete bands.
         magnificationFilter = .linear
         
-        configureCaptureSession()
-        audioOutput.setSampleBufferDelegate(self,
-                                            queue: captureQueue)
+        audioSource
+            .buffer(size: AudioSpectrogram.sampleCount, prefetch: .byRequest, whenFull: .dropOldest)
+            .collect(AudioSpectrogram.sampleCount)
+            .sink(receiveValue: {[unowned self] samples in
+                if self.rawAudioData.count < AudioSpectrogram.sampleCount * 2 {
+                    rawAudioData.append(contentsOf: samples)
+                }
+                
+                dispatchSemaphore.wait()
+                
+                while self.rawAudioData.count >= MelSpectrogram.sampleCount {
+                    let dataToProcess = Array(self.rawAudioData[0 ..< MelSpectrogram.sampleCount])
+                    self.rawAudioData.removeFirst(MelSpectrogram.hopCount)
+                    self.processData(values: dataToProcess)
+                }
+             
+                createAudioSpectrogram()
+                
+                dispatchSemaphore.signal()
+                
+            })
+            .store(in: &cancelables)
     }
+    
+   
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -47,15 +68,7 @@ public class MelSpectrogram: CALayer {
     /// The number of mel filter banks  — the height of the spectrogram.
     static let filterBankCount = 40
     
-    let captureSession = AVCaptureSession()
-    let audioOutput = AVCaptureAudioDataOutput()
-    let captureQueue = DispatchQueue(label: "captureQueue",
-                                     qos: .userInitiated,
-                                     attributes: [],
-                                     autoreleaseFrequency: .workItem)
-    let sessionQueue = DispatchQueue(label: "sessionQueue",
-                                     attributes: [],
-                                     autoreleaseFrequency: .workItem)
+    var cancelables=Set<AnyCancellable>()
 
     /// Temporary buffers that the FFT operation uses for storing interim results.
     static var fftRealBuffer = [Float](repeating: 0, count: sampleCount / 2)

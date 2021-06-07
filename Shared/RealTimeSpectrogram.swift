@@ -44,17 +44,26 @@ struct RealTimeSpectrogram: View {
     
     var body: some View {
         
-        VStack(alignment: .trailing, content: {
-            Spectrum(samples: buffer.buffer, autoScale: autoScale)
-                .stroke(Color.red)
-                .background(Rectangle().fill(Color.black))
-            
-            Toggle(isOn: $autoScale, label: {
-                Text("Autoscale")
-            })
-        })
+        Spectrum(samples: buffer.buffer, autoScale: autoScale)
+            .stroke(Color.red)
+            .background(Rectangle().fill(Color.black))
+            .overlay(toggle, alignment: .bottomTrailing)
         
-            
+        
+    }
+    
+    var toggle:some View{
+        let t=Toggle(isOn: $autoScale,
+               label: {
+                Text("Autoscale").foregroundColor(.white)
+               })
+        .fixedSize()
+        
+        #if os(macOS)
+            return t.controlSize(.mini)
+        #else
+        return t
+        #endif
     }
 }
 

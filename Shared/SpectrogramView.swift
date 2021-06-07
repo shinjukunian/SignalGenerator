@@ -12,13 +12,14 @@ import SwiftUI
 
 struct SpectrogramView:NSViewRepresentable{
     
+    let source:AudioSource.Publisher
+    
     func makeNSView(context: Context) -> NSView {
         
         let view=NSView(frame: .zero)
-        let layer=AudioSpectrogram()
+        let layer=AudioSpectrogram(audioSource: source)
         view.layer=layer
         view.wantsLayer = true
-        layer.startRunning()
         
         return view
     }
@@ -32,15 +33,16 @@ struct SpectrogramView:NSViewRepresentable{
 
 struct MelSpectrogramView:NSViewRepresentable{
     
+    let source:AudioSource.Publisher
     
     func makeNSView(context: Context) -> NSView {
         
         let view=NSView(frame: .zero)
         
-        let layer=MelSpectrogram()
+        let layer=MelSpectrogram(audioSource: source)
         view.layer=layer
         view.wantsLayer = true
-        layer.startRunning()
+        
         
         return view
     }
@@ -58,15 +60,15 @@ struct SpectrogramView:UIViewRepresentable{
     
     typealias UIViewType = UIView
     
-   
+    let source:AudioSource.Publisher
     
     func makeUIView(context: Context) -> UIView {
         
         let view=SpectrogramUIView()
-        let layer=AudioSpectrogram()
+        let layer=AudioSpectrogram(audioSource: source)
         view.layer.addSublayer(layer)
         layer.frame=view.bounds
-        layer.startRunning()
+        
         return view
     }
     
@@ -81,15 +83,15 @@ struct MelSpectrogramView:UIViewRepresentable{
     
     typealias UIViewType = UIView
     
-   
+    let source:AudioSource.Publisher
     
     func makeUIView(context: Context) -> UIView {
         
         let view=SpectrogramUIView()
-        let layer=MelSpectrogram()
+        let layer=MelSpectrogram(audioSource: source)
         view.layer.addSublayer(layer)
         layer.frame=view.bounds
-        layer.startRunning()
+        
         return view
     }
     

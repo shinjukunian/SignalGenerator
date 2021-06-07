@@ -25,14 +25,10 @@
 		5A100D1826560C8A00C00534 /* SpectrumAnalyzerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D1626560C8A00C00534 /* SpectrumAnalyzerView.swift */; };
 		5A100D2226563ED800C00534 /* MelSpectrogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D1F26563ED800C00534 /* MelSpectrogram.swift */; };
 		5A100D2326563ED800C00534 /* MelSpectrogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D1F26563ED800C00534 /* MelSpectrogram.swift */; };
-		5A100D2426563ED800C00534 /* MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D2026563ED800C00534 /* MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift */; };
-		5A100D2526563ED800C00534 /* MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D2026563ED800C00534 /* MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift */; };
 		5A100D2626563ED800C00534 /* MelSpectrogramMelSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D2126563ED800C00534 /* MelSpectrogramMelSupport.swift */; };
 		5A100D2726563ED800C00534 /* MelSpectrogramMelSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D2126563ED800C00534 /* MelSpectrogramMelSupport.swift */; };
 		5A100D2B26563FCA00C00534 /* AudioSpectrogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D2926563FCA00C00534 /* AudioSpectrogram.swift */; };
 		5A100D2C26563FCA00C00534 /* AudioSpectrogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D2926563FCA00C00534 /* AudioSpectrogram.swift */; };
-		5A100D2D26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D2A26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift */; };
-		5A100D2E26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A100D2A26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift */; };
 		5A100D312656439600C00534 /* LICENSE_AudioSpectrogram.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A100D302656439600C00534 /* LICENSE_AudioSpectrogram.txt */; };
 		5A100D322656439600C00534 /* LICENSE_AudioSpectrogram.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A100D302656439600C00534 /* LICENSE_AudioSpectrogram.txt */; };
 		5A100D34265643B300C00534 /* LICENSE_MelSpectrogram.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A100D33265643B300C00534 /* LICENSE_MelSpectrogram.txt */; };
@@ -60,10 +56,8 @@
 		5A100D132656064000C00534 /* SpectrogramView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrogramView.swift; sourceTree = "<group>"; };
 		5A100D1626560C8A00C00534 /* SpectrumAnalyzerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpectrumAnalyzerView.swift; sourceTree = "<group>"; };
 		5A100D1F26563ED800C00534 /* MelSpectrogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MelSpectrogram.swift; sourceTree = "<group>"; };
-		5A100D2026563ED800C00534 /* MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift"; sourceTree = "<group>"; };
 		5A100D2126563ED800C00534 /* MelSpectrogramMelSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MelSpectrogramMelSupport.swift; sourceTree = "<group>"; };
 		5A100D2926563FCA00C00534 /* AudioSpectrogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSpectrogram.swift; sourceTree = "<group>"; };
-		5A100D2A26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift"; sourceTree = "<group>"; };
 		5A100D302656439600C00534 /* LICENSE_AudioSpectrogram.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_AudioSpectrogram.txt; sourceTree = "<group>"; };
 		5A100D33265643B300C00534 /* LICENSE_MelSpectrogram.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_MelSpectrogram.txt; sourceTree = "<group>"; };
 		5A6D73C3266DBB9300654545 /* AudioSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioSource.swift; path = Shared/AudioSource.swift; sourceTree = SOURCE_ROOT; };
@@ -150,7 +144,6 @@
 			children = (
 				5A100D33265643B300C00534 /* LICENSE_MelSpectrogram.txt */,
 				5A100D1F26563ED800C00534 /* MelSpectrogram.swift */,
-				5A100D2026563ED800C00534 /* MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift */,
 				5A100D2126563ED800C00534 /* MelSpectrogramMelSupport.swift */,
 			);
 			path = OriginalMel;
@@ -161,7 +154,6 @@
 			children = (
 				5A100D302656439600C00534 /* LICENSE_AudioSpectrogram.txt */,
 				5A100D2926563FCA00C00534 /* AudioSpectrogram.swift */,
-				5A100D2A26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift */,
 			);
 			path = OriginalSpectrogram;
 			sourceTree = "<group>";
@@ -276,10 +268,8 @@
 				5A100D2226563ED800C00534 /* MelSpectrogram.swift in Sources */,
 				5A100CF2265531B900C00534 /* ContentView.swift in Sources */,
 				5A100D2B26563FCA00C00534 /* AudioSpectrogram.swift in Sources */,
-				5A100D2D26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */,
 				5A6D73CA266DC33C00654545 /* Spectrum.swift in Sources */,
 				5A100D1726560C8A00C00534 /* SpectrumAnalyzerView.swift in Sources */,
-				5A100D2426563ED800C00534 /* MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */,
 				5A6D73C4266DBB9300654545 /* AudioSource.swift in Sources */,
 				5A100CF0265531B900C00534 /* SignalGeneratorApp.swift in Sources */,
 			);
@@ -298,10 +288,8 @@
 				5A100D2326563ED800C00534 /* MelSpectrogram.swift in Sources */,
 				5A100CF3265531B900C00534 /* ContentView.swift in Sources */,
 				5A100D2C26563FCA00C00534 /* AudioSpectrogram.swift in Sources */,
-				5A100D2E26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */,
 				5A6D73CB266DC33C00654545 /* Spectrum.swift in Sources */,
 				5A100D1826560C8A00C00534 /* SpectrumAnalyzerView.swift in Sources */,
-				5A100D2526563ED800C00534 /* MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */,
 				5A6D73C5266DBB9300654545 /* AudioSource.swift in Sources */,
 				5A100CF1265531B900C00534 /* SignalGeneratorApp.swift in Sources */,
 			);
