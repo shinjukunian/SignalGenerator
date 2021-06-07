@@ -18,20 +18,21 @@ struct ContentView: View {
         VStack{
             
             if showSpectrogram{
-                SpectrumAnalyzerView()
-//                    .frame(maxHeight: 300)
-                Divider()
+                GroupBox{
+                    SpectrumAnalyzerView()
+                }
             }
             
-            VStack{
-                picker
-                Slider(value: $generator.amplitude, in: Float(0)...1, minimumValueLabel: Image(systemName:"speaker.wave.1"), maximumValueLabel: Image(systemName:"speaker.wave.3")){
-                    Text("")
-                }
-                
-                Text("Volume: \(generator.amplitude, specifier: "%.2f")")
-            }.disabled(generator.isRunning == false)
-            
+            GroupBox{
+                VStack{
+                    picker
+                    Slider(value: $generator.amplitude, in: Float(0)...1, minimumValueLabel: Image(systemName:"speaker.wave.1"), maximumValueLabel: Image(systemName:"speaker.wave.3")){
+                        Text("")
+                    }
+                    
+                    Text("Volume: \(generator.amplitude, specifier: "%.2f")")
+                }.disabled(generator.isRunning == false)
+            }
             
             
             ScrollView{

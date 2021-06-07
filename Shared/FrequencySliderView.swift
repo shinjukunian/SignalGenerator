@@ -22,51 +22,51 @@ struct FrequencySliderView: View {
     
     
     var body: some View {
-        VStack(alignment: .trailing){
-            Divider()
-                .padding(.bottom, 3.0)
-            VStack{
-                if showClose{
-                    HStack{
-                        Spacer()
-                        Button(action: {
-                            removeHandler(node)
-                        }, label: {
-                            Image(systemName: "xmark")
-                        }).buttonStyle(BorderlessButtonStyle())
-                    }
-                    .padding(.bottom, 3.0)
-                }
+        GroupBox{
+            VStack(alignment: .trailing){
                 
-                Slider(value: $node.frequency,
-                       in: range,
-                       minimumValueLabel: Text("\(range.lowerBound, specifier: "%.0f")"),
-                       maximumValueLabel: Text("\(range.upperBound, specifier: "%.0f")")){
-                    Text("")
-                }
-                
-                
-                #if os(macOS)
-                HStack{
-                    innerStack
-                    Toggle(isOn: $showLowRange, label: {
-                        Text("Fine")
-                    }).fixedSize()
-                }
-                #else
                 VStack{
-                    innerStack
-                    Toggle(isOn: $showLowRange, label: {
-                        Text("Fine")
-                    }).fixedSize()
+                    if showClose{
+                        HStack{
+                            Spacer()
+                            Button(action: {
+                                removeHandler(node)
+                            }, label: {
+                                Image(systemName: "xmark")
+                            }).buttonStyle(BorderlessButtonStyle())
+                        }
+                        .padding(.vertical, 3.0)
+                    }
+                    
+                    Slider(value: $node.frequency,
+                           in: range,
+                           minimumValueLabel: Text("\(range.lowerBound, specifier: "%.0f")"),
+                           maximumValueLabel: Text("\(range.upperBound, specifier: "%.0f")")){
+                        Text("")
+                    }
+                    
+                    
+                    #if os(macOS)
+                    HStack{
+                        innerStack
+                        Toggle(isOn: $showLowRange, label: {
+                            Text("Fine")
+                        }).fixedSize()
+                    }
+                    #else
+                    VStack{
+                        innerStack
+                        Toggle(isOn: $showLowRange, label: {
+                            Text("Fine")
+                        }).fixedSize()
+                    }
+                    #endif
+                    
+                    
                 }
-                #endif
-
-
+                
             }
-            
         }
-        
         .onReceive(Just(node.frequency), perform: { v in
             freqText=NumberFormatter().string(from: NSNumber(value: v)) ?? ""
         })
@@ -78,6 +78,7 @@ struct FrequencySliderView: View {
 //                frequency=0
 //            }
 //        })
+        
     }
         
     var innerStack:some View{

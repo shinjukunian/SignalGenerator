@@ -19,7 +19,7 @@ public class MelSpectrogram: CALayer {
         
         // Set the `magnificationFilter` to `.nearest` to render the mel
         // spectrogram as discrete bands.
-        magnificationFilter = .nearest
+        magnificationFilter = .linear
         
         configureCaptureSession()
         audioOutput.setSampleBufferDelegate(self,

@@ -1,65 +1,38 @@
-/*
-See LICENSE folder for this sample’s licensing information.
+//
+//  AudioSource.swift
+//  SignalGenerator
+//
+//  Created by Morten Bertz on 2021/06/07.
+//
 
-Abstract:
-AudioSpectrogram extension for AVFoundation support.
-*/
-
+import Foundation
 import AVFoundation
+import Combine
 
-// MARK: AVCaptureAudioDataOutputSampleBufferDelegate and AVFoundation Support
+class AudioSource:NSObject, AVCaptureAudioDataOutputSampleBufferDelegate{
+    
+    
+    let captureSession = AVCaptureSession()
+    let audioOutput = AVCaptureAudioDataOutput()
+    let captureQueue = DispatchQueue(label: "captureQueue",
+                                     qos: .userInitiated,
+                                     attributes: [],
+                                     autoreleaseFrequency: .workItem)
+    let sessionQueue = DispatchQueue(label: "sessionQueue",
+                                     attributes: [],
+                                     autoreleaseFrequency: .workItem)
+    
+    fileprivate let _samples = PassthroughSubject<Int16, Never>()
+    lazy var samples=_samples.eraseToAnyPublisher()
 
-extension AudioSpectrogram: AVCaptureAudioDataOutputSampleBufferDelegate {
- 
-    public func captureOutput(_ output: AVCaptureOutput,
-                              didOutput sampleBuffer: CMSampleBuffer,
-                              from connection: AVCaptureConnection) {
-
-        var audioBufferList = AudioBufferList()
-        var blockBuffer: CMBlockBuffer?
-  
-        CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(
-            sampleBuffer,
-            bufferListSizeNeededOut: nil,
-            bufferListOut: &audioBufferList,
-            bufferListSize: MemoryLayout.stride(ofValue: audioBufferList),
-            blockBufferAllocator: nil,
-            blockBufferMemoryAllocator: nil,
-            flags: kCMSampleBufferFlag_AudioBufferList_Assure16ByteAlignment,
-            blockBufferOut: &blockBuffer)
-        
-        guard let data = audioBufferList.mBuffers.mData else {
-            return
-        }
-
-        /// The _Nyquist frequency_ is the highest frequency that a sampled system can properly
-        /// reproduce and is half the sampling rate of such a system. Although  this app doesn't use
-        /// `nyquistFrequency` you may find this code useful to add an overlay to the user interface.
-        if nyquistFrequency == nil {
-            let duration = Float(CMSampleBufferGetDuration(sampleBuffer).value)
-            let timescale = Float(CMSampleBufferGetDuration(sampleBuffer).timescale)
-            let numsamples = Float(CMSampleBufferGetNumSamples(sampleBuffer))
-            nyquistFrequency = 0.5 / (duration / timescale / numsamples)
-        }
-
-        if self.rawAudioData.count < AudioSpectrogram.sampleCount * 2 {
-            let actualSampleCount = CMSampleBufferGetNumSamples(sampleBuffer)
-            
-            let ptr = data.bindMemory(to: Int16.self, capacity: actualSampleCount)
-            let buf = UnsafeBufferPointer(start: ptr, count: actualSampleCount)
-            
-            rawAudioData.append(contentsOf: Array(buf))
-        }
-
-        while self.rawAudioData.count >= AudioSpectrogram.sampleCount {
-            let dataToProcess = Array(self.rawAudioData[0 ..< AudioSpectrogram.sampleCount])
-            self.rawAudioData.removeFirst(AudioSpectrogram.hopCount)
-            self.processData(values: dataToProcess)
-        }
-     
-        createAudioSpectrogram()
+    override init() {
+        super.init()
+        configureCaptureSession()
+        audioOutput.setSampleBufferDelegate(self,
+                                            queue: captureQueue)
     }
     
+
     func configureCaptureSession() {
         // Also note that:
         //
@@ -136,4 +109,38 @@ extension AudioSpectrogram: AVCaptureAudioDataOutputSampleBufferDelegate {
             }
         }
     }
+    
+    
+    public func captureOutput(_ output: AVCaptureOutput,
+                              didOutput sampleBuffer: CMSampleBuffer,
+                              from connection: AVCaptureConnection) {
+
+        var audioBufferList = AudioBufferList()
+        var blockBuffer: CMBlockBuffer?
+  
+        CMSampleBufferGetAudioBufferListWithRetainedBlockBuffer(
+            sampleBuffer,
+            bufferListSizeNeededOut: nil,
+            bufferListOut: &audioBufferList,
+            bufferListSize: MemoryLayout.stride(ofValue: audioBufferList),
+            blockBufferAllocator: nil,
+            blockBufferMemoryAllocator: nil,
+            flags: kCMSampleBufferFlag_AudioBufferList_Assure16ByteAlignment,
+            blockBufferOut: &blockBuffer)
+        
+        guard let data = audioBufferList.mBuffers.mData else {
+            return
+        }
+        
+        let actualSampleCount = CMSampleBufferGetNumSamples(sampleBuffer)
+        
+        let ptr = data.bindMemory(to: Int16.self, capacity: actualSampleCount)
+        let buf = UnsafeBufferPointer(start: ptr, count: actualSampleCount)
+        let array=Array(buf)
+        _=self._samples.append(array)
+        
+    }
+    
 }
+
+

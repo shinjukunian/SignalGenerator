@@ -37,6 +37,8 @@
 		5A100D322656439600C00534 /* LICENSE_AudioSpectrogram.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A100D302656439600C00534 /* LICENSE_AudioSpectrogram.txt */; };
 		5A100D34265643B300C00534 /* LICENSE_MelSpectrogram.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A100D33265643B300C00534 /* LICENSE_MelSpectrogram.txt */; };
 		5A100D35265643B300C00534 /* LICENSE_MelSpectrogram.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A100D33265643B300C00534 /* LICENSE_MelSpectrogram.txt */; };
+		5A6D73C4266DBB9300654545 /* AudioSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D73C3266DBB9300654545 /* AudioSource.swift */; };
+		5A6D73C5266DBB9300654545 /* AudioSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D73C3266DBB9300654545 /* AudioSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -60,6 +62,7 @@
 		5A100D2A26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift"; sourceTree = "<group>"; };
 		5A100D302656439600C00534 /* LICENSE_AudioSpectrogram.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_AudioSpectrogram.txt; sourceTree = "<group>"; };
 		5A100D33265643B300C00534 /* LICENSE_MelSpectrogram.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_MelSpectrogram.txt; sourceTree = "<group>"; };
+		5A6D73C3266DBB9300654545 /* AudioSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioSource.swift; path = Shared/AudioSource.swift; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +96,7 @@
 		5A100CDC265531B800C00534 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				5A6D73C3266DBB9300654545 /* AudioSource.swift */,
 				5A100D2F26563FD600C00534 /* OriginalSpectrogram */,
 				5A100D2826563EE100C00534 /* OriginalMel */,
 				5A100CDD265531B800C00534 /* SignalGeneratorApp.swift */,
@@ -266,6 +270,7 @@
 				5A100D2D26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */,
 				5A100D1726560C8A00C00534 /* SpectrumAnalyzerView.swift in Sources */,
 				5A100D2426563ED800C00534 /* MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */,
+				5A6D73C4266DBB9300654545 /* AudioSource.swift in Sources */,
 				5A100CF0265531B900C00534 /* SignalGeneratorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -285,6 +290,7 @@
 				5A100D2E26563FCA00C00534 /* AudioSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */,
 				5A100D1826560C8A00C00534 /* SpectrumAnalyzerView.swift in Sources */,
 				5A100D2526563ED800C00534 /* MelSpectrogram+AVCaptureAudioDataOutputSampleBufferDelegate.swift in Sources */,
+				5A6D73C5266DBB9300654545 /* AudioSource.swift in Sources */,
 				5A100CF1265531B900C00534 /* SignalGeneratorApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

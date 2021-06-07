@@ -38,9 +38,9 @@ struct SpectrumAnalyzerView: View {
             
             switch mode{
             case .mel:
-                MelSpectrogramView().clipShape(RoundedRectangle(cornerRadius: 20))
+                MelSpectrogramView().clipShape(RoundedRectangle(cornerRadius: 6))
             case .spectrogram:
-                SpectrogramView().clipShape(RoundedRectangle(cornerRadius: 20))
+                SpectrogramView().clipShape(RoundedRectangle(cornerRadius: 6))
             }
             
             
