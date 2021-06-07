@@ -8,8 +8,9 @@
 import Foundation
 import AVFoundation
 import Combine
+import Accelerate
 
-class AudioSource:NSObject, AVCaptureAudioDataOutputSampleBufferDelegate{
+class AudioSource:NSObject,ObservableObject, AVCaptureAudioDataOutputSampleBufferDelegate{
     
     
     let captureSession = AVCaptureSession()
@@ -109,6 +110,11 @@ class AudioSource:NSObject, AVCaptureAudioDataOutputSampleBufferDelegate{
             }
         }
     }
+    func stopRunning() {
+        sessionQueue.async {
+            self.captureSession.stopRunning()
+        }
+    }
     
     
     public func captureOutput(_ output: AVCaptureOutput,
@@ -137,7 +143,10 @@ class AudioSource:NSObject, AVCaptureAudioDataOutputSampleBufferDelegate{
         let ptr = data.bindMemory(to: Int16.self, capacity: actualSampleCount)
         let buf = UnsafeBufferPointer(start: ptr, count: actualSampleCount)
         let array=Array(buf)
-        _=self._samples.append(array)
+                
+        array.forEach({
+            self._samples.send($0)
+        })        
         
     }
     
