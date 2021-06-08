@@ -13,6 +13,7 @@ struct SpectrumAnalyzerView: View {
         case spectrogram
         case mel
         case realtime
+        case fft
         
         var id: String {return rawValue}
         
@@ -23,6 +24,8 @@ struct SpectrumAnalyzerView: View {
             case .mel:
                 return NSLocalizedString("Mel Spectrum", comment: "")
             case .realtime:
+                return NSLocalizedString("Waveform", comment: "")
+            case .fft:
                 return NSLocalizedString("Spectrum", comment: "")
             }
             
@@ -37,6 +40,7 @@ struct SpectrumAnalyzerView: View {
         VStack{
             Picker(selection: $mode, label: Text(""), content: {
                 Text(verbatim: Output.realtime.description).tag(Output.realtime)
+                Text(verbatim: Output.fft.description).tag(Output.fft)
                 Text(verbatim: Output.spectrogram.description).tag(Output.spectrogram)
                 Text(verbatim: Output.mel.description).tag(Output.mel)
                 
@@ -52,7 +56,9 @@ struct SpectrumAnalyzerView: View {
                 
             case .realtime:
                 RealTimeSpectrogram(audioSource: source.samples)
-//                    .clipShape(RoundedRectangle(cornerRadius: 6))
+                    .clipShape(RoundedRectangle(cornerRadius: 6))
+            case .fft:
+                FFTView(audioSource: source.samples)
             }
             
             

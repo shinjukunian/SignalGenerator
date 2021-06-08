@@ -33,6 +33,8 @@
 		5A100D322656439600C00534 /* LICENSE_AudioSpectrogram.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A100D302656439600C00534 /* LICENSE_AudioSpectrogram.txt */; };
 		5A100D34265643B300C00534 /* LICENSE_MelSpectrogram.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A100D33265643B300C00534 /* LICENSE_MelSpectrogram.txt */; };
 		5A100D35265643B300C00534 /* LICENSE_MelSpectrogram.txt in Resources */ = {isa = PBXBuildFile; fileRef = 5A100D33265643B300C00534 /* LICENSE_MelSpectrogram.txt */; };
+		5A4F67F0266F757700F5A0AC /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F67EF266F757700F5A0AC /* FFT.swift */; };
+		5A4F67F1266F757700F5A0AC /* FFT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F67EF266F757700F5A0AC /* FFT.swift */; };
 		5A6D73C4266DBB9300654545 /* AudioSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D73C3266DBB9300654545 /* AudioSource.swift */; };
 		5A6D73C5266DBB9300654545 /* AudioSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D73C3266DBB9300654545 /* AudioSource.swift */; };
 		5A6D73C7266DC00800654545 /* RealTimeSpectrogram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A6D73C6266DC00800654545 /* RealTimeSpectrogram.swift */; };
@@ -60,6 +62,7 @@
 		5A100D2926563FCA00C00534 /* AudioSpectrogram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioSpectrogram.swift; sourceTree = "<group>"; };
 		5A100D302656439600C00534 /* LICENSE_AudioSpectrogram.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_AudioSpectrogram.txt; sourceTree = "<group>"; };
 		5A100D33265643B300C00534 /* LICENSE_MelSpectrogram.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE_MelSpectrogram.txt; sourceTree = "<group>"; };
+		5A4F67EF266F757700F5A0AC /* FFT.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FFT.swift; sourceTree = "<group>"; };
 		5A6D73C3266DBB9300654545 /* AudioSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AudioSource.swift; path = Shared/AudioSource.swift; sourceTree = SOURCE_ROOT; };
 		5A6D73C6266DC00800654545 /* RealTimeSpectrogram.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealTimeSpectrogram.swift; sourceTree = "<group>"; };
 		5A6D73C9266DC33C00654545 /* Spectrum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spectrum.swift; sourceTree = "<group>"; };
@@ -103,6 +106,7 @@
 				5A100CDE265531B800C00534 /* ContentView.swift */,
 				5A100D1626560C8A00C00534 /* SpectrumAnalyzerView.swift */,
 				5A100D132656064000C00534 /* SpectrogramView.swift */,
+				5A4F67EF266F757700F5A0AC /* FFT.swift */,
 				5A6D73C6266DC00800654545 /* RealTimeSpectrogram.swift */,
 				5A6D73C9266DC33C00654545 /* Spectrum.swift */,
 				5A100D012655513500C00534 /* FrequencySliderView.swift */,
@@ -260,6 +264,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A6D73C7266DC00800654545 /* RealTimeSpectrogram.swift in Sources */,
+				5A4F67F0266F757700F5A0AC /* FFT.swift in Sources */,
 				5A100D142656064000C00534 /* SpectrogramView.swift in Sources */,
 				5A100D022655513500C00534 /* FrequencySliderView.swift in Sources */,
 				5A100D2626563ED800C00534 /* MelSpectrogramMelSupport.swift in Sources */,
@@ -280,6 +285,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5A6D73C8266DC00800654545 /* RealTimeSpectrogram.swift in Sources */,
+				5A4F67F1266F757700F5A0AC /* FFT.swift in Sources */,
 				5A100D152656064000C00534 /* SpectrogramView.swift in Sources */,
 				5A100D032655513500C00534 /* FrequencySliderView.swift in Sources */,
 				5A100D2726563ED800C00534 /* MelSpectrogramMelSupport.swift in Sources */,
